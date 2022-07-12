@@ -90,7 +90,7 @@ export class App {
     window.requestAnimationFrame(() => {
       const { pos, dir } = this.state.pos.wheel
       if (Math.abs(pos) > 0) {
-        dir ? this.next() : this.prev()
+        dir ? this.prev() : this.next()
       }
       window.setTimeout(() => (this.state.isBusy = false), 1000)
     })
