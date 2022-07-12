@@ -1,4 +1,4 @@
-const APP_PREFIX = 'VB_MENU_'
+const APP_PREFIX = 'VB__MENU__'
 const VERSION = '1.0.0'
 const CACHE_NAME = `${APP_PREFIX}${VERSION}`
 const URLS = [
@@ -22,7 +22,6 @@ const URLS = [
   '/public/img/page5.jpg',
   '/public/img/page9.jpg',
   '/public/img/page8.jpg',
-  '/public/manifest.json',
   '/public/safari-pinned-tab.svg',
   '/public/mstile-150x150.png',
   '/public/ipad_splash.png',
