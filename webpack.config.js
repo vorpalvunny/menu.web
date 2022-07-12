@@ -86,10 +86,6 @@ const config = {
         to: 'public',
       },
       {
-        from: './src/manifest.json',
-        to: 'manifest.json',
-      },
-      {
         from: './src/manifest.webmanifest',
         to: 'manifest.webmanifest',
       },
