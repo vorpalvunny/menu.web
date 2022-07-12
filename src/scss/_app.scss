@@ -53,14 +53,11 @@ div {
 }
 
 figure {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   transition: all 0.5s ease;
-  &.active {
-    display: flex !important;
-  }
 }
 
 figcaption {

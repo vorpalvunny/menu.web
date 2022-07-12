@@ -1,10 +1,9 @@
-const APP_PREFIX = 'VB_'
+const APP_PREFIX = 'VBMENU_'
 const VERSION = '1.0.0'
 const CACHE_NAME = `${APP_PREFIX}${VERSION}`
 const URLS = [
   '/public/android-chrome-192x192.png',
   '/public/apple-touch-icon.png',
-  '/public/browserconfig.xml',
   '/public/favicon-16x16.png',
   '/public/favicon-32x32.png',
   '/public/favicon.ico',

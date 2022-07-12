@@ -1,4 +1,14 @@
+/**
+ *
+ *
+ * @export
+ * @class App
+ */
 export class App {
+  /**
+   * Creates an instance of App.
+   * @memberof App
+   */
   constructor() {
     this.config = {
       prefix: 'page',
@@ -21,34 +31,174 @@ export class App {
       },
     }
   }
+
+  /**
+   *
+   * @type {HTMLElement}
+   * @readonly
+   * @memberof App
+   */
+  get $figure() {
+    return document.querySelector('figure')
+  }
+
+  /**
+   *
+   * @type {HTMLElement}
+   * @readonly
+   * @memberof App
+   */
+  get $figcaption() {
+    return document.querySelector('figcaption')
+  }
+
+  /**
+   *
+   * @type {HTMLImageElement}
+   * @readonly
+   * @memberof App
+   */
+  get $img() {
+    return document.querySelector('img')
+  }
+
+  /**
+   *
+   * @type {HTMLElement}
+   * @readonly
+   * @memberof App
+   */
   get $main() {
     return document.querySelector('main')
   }
+
+  /**
+   *
+   * @type {HTMLButtonElement}
+   * @readonly
+   * @memberof App
+   */
   get $next() {
     return document.querySelector('.next')
   }
+
+  /**
+   *
+   * @type {HTMLButtonElement}
+   * @readonly
+   * @memberof App
+   */
   get $prev() {
     return document.querySelector('.prev')
   }
-  setPage(no = 0) {
-    const id = `${this.config.prefix}${no}`
-    const src = `/public/img/${id}.jpg`
 
-    const $figure = document.createElement('figure')
-    $figure.setAttribute('id', id)
-
-    const $img = document.createElement('img')
-    $img.setAttribute('src', src)
-    $img.setAttribute('loading', 'lazy')
-    $figure.appendChild($img)
-
-    const $figcaption = document.createElement('figcaption')
-    $figcaption.innerText = `${no + 1}`
-    $figure.appendChild($figcaption)
-
-    const $div = document.querySelector('div')
-    $div.appendChild($figure)
+  /**
+   *
+   *
+   * @param {number} [no=0]
+   * @return {string}
+   * @memberof App
+   */
+  getId(no = 0) {
+    return `${this.config.prefix}${no}`
   }
+
+  /**
+   *
+   *
+   * @param {number} [no=0]
+   * @return {string}
+   * @memberof App
+   */
+  getSrc(no = 0) {
+    return `/public/img/${this.getId(no)}.jpg`
+  }
+
+  /**
+   *
+   *
+   * @memberof App
+   */
+  init() {
+    this.goTo(this.config.start)
+    this.registerEventListeners()
+  }
+
+  /**
+   *
+   *
+   * @memberof App
+   */
+  next() {
+    if (this.state.page === this.config.last - 1) {
+      return
+    }
+
+    this.goTo(this.state.page + 1)
+  }
+
+  /**
+   *
+   *
+   * @memberof App
+   */
+  prev() {
+    if (this.state.page === this.config.start) {
+      return
+    }
+
+    this.goTo(this.state.page - 1)
+  }
+
+  /**
+   *
+   *
+   * @param {number} [no=0]
+   * @memberof App
+   */
+  goTo(no = 0) {
+    this.state.page = no
+    this.$img.setAttribute('src', this.getSrc(no))
+    this.$figcaption.innerText = `${no + 1}`
+
+    const { start, last } = this.config
+    switch (this.state.page) {
+      case start:
+        this.$next.style.display = 'inline-block'
+        this.$prev.style.display = 'none'
+        break
+
+      case last - 1:
+        this.$next.style.display = 'none'
+        this.$prev.style.display = 'inline-block'
+        break
+
+      default:
+        this.$next.style.display = 'inline-block'
+        this.$prev.style.display = 'inline-block'
+        break
+    }
+  }
+
+  /**
+   *
+   *
+   * @memberof App
+   */
+  registerEventListeners() {
+    this.$next.addEventListener('click', this.next.bind(this))
+    this.$prev.addEventListener('click', this.prev.bind(this))
+    this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
+    this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
+    document.addEventListener('wheel', this.onWheel.bind(this))
+  }
+
+  /**
+   *
+   *
+   * @param {TouchEvent} e
+   * @memberof App
+   */
   onMoveTouch(e) {
     if (!this.state.pos.initial) {
       return
@@ -74,10 +224,24 @@ export class App {
     this.state.pos.initial = undefined
     e.preventDefault()
   }
+
+  /**
+   *
+   *
+   * @param {TouchEvent} e
+   * @memberof App
+   */
   onStartTouch(e) {
     const [$0] = e.touches
     this.state.pos.initial = $0
   }
+
+  /**
+   *
+   *
+   * @param {WheelEvent} e
+   * @memberof App
+   */
   onWheel(e) {
     const { deltaY = 0 } = e
     this.state.pos.wheel.pos = deltaY
@@ -94,59 +258,5 @@ export class App {
       }
       window.setTimeout(() => (this.state.isBusy = false), 1000)
     })
-  }
-  init() {
-    const { start, last } = this.config
-    for (let i = start; i < last; i++) this.setPage(i)
-    this.goTo(start)
-    this.registerEvents()
-  }
-  registerEvents() {
-    this.$next.addEventListener('click', this.next.bind(this))
-    this.$prev.addEventListener('click', this.prev.bind(this))
-    this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
-    this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
-    document.addEventListener('wheel', this.onWheel.bind(this))
-  }
-  next() {
-    if (this.state.page === this.config.last - 1) {
-      return
-    }
-
-    this.goTo(this.state.page + 1)
-  }
-  prev() {
-    if (this.state.page === this.config.start) {
-      return
-    }
-
-    this.goTo(this.state.page - 1)
-  }
-  goTo(no = 0) {
-    const { start, last, prefix } = this.config
-    this.state.page = no
-    switch (this.state.page) {
-      case start:
-        this.$next.style.display = 'inline-block'
-        this.$prev.style.display = 'none'
-        break
-
-      case last - 1:
-        this.$next.style.display = 'none'
-        this.$prev.style.display = 'inline-block'
-        break
-
-      default:
-        this.$next.style.display = 'inline-block'
-        this.$prev.style.display = 'inline-block'
-        break
-    }
-
-    const clazz = 'active'
-    const id = `${prefix}${no}`
-    const $figures = document.querySelectorAll('figure')
-    const $figure = document.getElementById(id)
-    $figures.forEach($f => $f.classList.remove(clazz))
-    $figure.classList.add(clazz)
   }
 }

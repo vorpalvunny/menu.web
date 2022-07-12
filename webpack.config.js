@@ -44,10 +44,6 @@ const config = {
         loader: 'url-loader',
       },
       {
-        test: /\.(webmanifest|manifest|json)$/i,
-        loader: 'url-loader',
-      },
-      {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
           {
@@ -92,6 +88,10 @@ const config = {
       {
         from: './src/manifest.json',
         to: 'manifest.json',
+      },
+      {
+        from: './src/browserconfig.xml',
+        to: 'browserconfig.xml',
       },
     ]),
     new MiniCssExtractPlugin({
