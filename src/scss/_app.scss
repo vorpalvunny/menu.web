@@ -86,12 +86,20 @@ img {
     width: calc(100% - 2rem);
     height: auto;
   }
+
+  figcaption {
+    bottom: 1.5rem;
+  }
 }
 
 @media only screen and (min-width: 600px) {
   img {
     width: calc(100% - 2rem);
     height: auto;
+  }
+
+  figcaption {
+    bottom: 1.5rem;
   }
 }
 
@@ -102,7 +110,7 @@ img {
   }
 
   figcaption {
-    bottom: 3rem;
+    bottom: 2rem;
   }
 }
 
@@ -113,7 +121,7 @@ img {
   }
 
   figcaption {
-    bottom: 1rem;
+    bottom: 2rem;
   }
 }
 
@@ -124,7 +132,7 @@ img {
   }
 
   figcaption {
-    bottom: 0.5rem;
+    bottom: 2rem;
   }
 }
 
