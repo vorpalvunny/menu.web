@@ -1,6 +1,7 @@
 {
     "name": "VB MENU",
     "short_name": "VB",
+    "description": "VB MENU",
     "icons": [
         {
             "src": "/public/android-chrome-192x192.png",
@@ -17,6 +18,5 @@
     "background_color": "#f7f3e5",
     "display": "standalone",
     "start_url": "/",
-    "scope": "/",
     "orientation": "any"
 }
