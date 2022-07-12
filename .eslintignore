@@ -25,3 +25,4 @@ docs/*
 docs/api.skywind.asiangaming-etiloader.com.postman_collection.json
 test/.eslintrc.js
 ./test/.eslintrc.js
+src/sw.js

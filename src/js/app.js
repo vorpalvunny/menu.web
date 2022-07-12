@@ -148,7 +148,5 @@ export class App {
     const $figure = document.getElementById(id)
     $figures.forEach($f => $f.classList.remove(clazz))
     $figure.classList.add(clazz)
-
-    // location.hash = `#${prefix}${no}`
   }
 }

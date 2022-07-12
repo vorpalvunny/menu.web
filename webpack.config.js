@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const CssUrlRelativePlugin = require('css-url-relative-plugin')
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 const glob = require('glob')
 
 const IS_DEV = process.env.NODE_ENV === 'dev'
@@ -43,7 +44,7 @@ const config = {
         loader: 'url-loader',
       },
       {
-        test: /\.(webmanifest|manifest)$/i,
+        test: /\.(webmanifest|manifest|json)$/i,
         loader: 'url-loader',
       },
       {
@@ -98,6 +99,9 @@ const config = {
       include: 'initial',
     }),
     new CssUrlRelativePlugin(),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, 'src/sw.js'),
+    }),
   ],
   devServer: {
     host: 'vb-menu.web',
