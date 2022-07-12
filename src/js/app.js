@@ -70,7 +70,7 @@ export class App {
       return
     }
 
-    diff.clientY > 0 ? this.prev() : this.next()
+    diff.clientY > 0 ? this.next() : this.prev()
     this.state.pos.initial = undefined
     e.preventDefault()
   }
@@ -78,7 +78,7 @@ export class App {
     const [$0] = e.touches
     this.state.pos.initial = $0
   }
-  onZoom(e) {
+  onWheel(e) {
     const { deltaY = 0 } = e
     this.state.pos.wheel.pos = deltaY
     this.state.pos.wheel.dir = deltaY > 0
@@ -90,7 +90,7 @@ export class App {
     window.requestAnimationFrame(() => {
       const { pos, dir } = this.state.pos.wheel
       if (Math.abs(pos) > 0) {
-        dir ? this.prev() : this.next()
+        dir ? this.next() : this.prev()
       }
       window.setTimeout(() => (this.state.isBusy = false), 1000)
     })
@@ -106,7 +106,7 @@ export class App {
     this.$prev.addEventListener('click', this.prev.bind(this))
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
-    document.addEventListener('wheel', this.onZoom.bind(this))
+    document.addEventListener('wheel', this.onWheel.bind(this))
   }
   next() {
     if (this.state.page === this.config.last - 1) {
