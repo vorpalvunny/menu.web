@@ -43,6 +43,10 @@ const config = {
         loader: 'url-loader',
       },
       {
+        test: /\.(webmanifest|manifest)$/i,
+        loader: 'url-loader',
+      },
+      {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
           {
