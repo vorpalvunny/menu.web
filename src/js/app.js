@@ -32,7 +32,7 @@ export class App {
   }
   setPage(no = 0) {
     const id = `${this.config.prefix}${no}`
-    const src = `./public/img/${id}.jpg`
+    const src = `/public/img/${id}.jpg`
 
     const $figure = document.createElement('figure')
     $figure.setAttribute('id', id)
