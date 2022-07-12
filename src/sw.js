@@ -1,4 +1,4 @@
-const APP_PREFIX = 'VB__MENU__'
+const APP_PREFIX = '_VBMENU_'
 const VERSION = '1.0.0'
 const CACHE_NAME = `${APP_PREFIX}${VERSION}`
 const URLS = [
