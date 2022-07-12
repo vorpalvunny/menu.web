@@ -89,6 +89,10 @@ const config = {
         from: './src/public',
         to: 'public',
       },
+      {
+        from: './src/manifest.json',
+        to: 'manifest.json',
+      },
     ]),
     new MiniCssExtractPlugin({
       filename: IS_DEV ? 'css/[name].css' : 'css/[name].[contenthash].css',
