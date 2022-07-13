@@ -2225,6 +2225,17 @@ conventional-changelog-atom@^2.0.8:
   dependencies:
     q "^1.5.1"
 
+conventional-changelog-cli@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/conventional-changelog-cli/-/conventional-changelog-cli-2.2.2.tgz#9a7746cede92c6a8f27dc46692efaadfbed60daa"
+  integrity sha512-8grMV5Jo8S0kP3yoMeJxV2P5R6VJOqK72IiSV9t/4H5r/HiRqEBQ83bYGuz4Yzfdj4bjaAEhZN/FFbsFXr5bOA==
+  dependencies:
+    add-stream "^1.0.0"
+    conventional-changelog "^3.1.24"
+    lodash "^4.17.15"
+    meow "^8.0.0"
+    tempfile "^3.0.0"
+
 conventional-changelog-codemirror@^2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/conventional-changelog-codemirror/-/conventional-changelog-codemirror-2.0.8.tgz#398e9530f08ce34ec4640af98eeaf3022eb1f7dc"
@@ -2317,7 +2328,7 @@ conventional-changelog-writer@^5.0.0:
     split "^1.0.0"
     through2 "^4.0.0"
 
-conventional-changelog@^3.1.25:
+conventional-changelog@^3.1.24:
   version "3.1.25"
   resolved "https://registry.yarnpkg.com/conventional-changelog/-/conventional-changelog-3.1.25.tgz#3e227a37d15684f5aa1fb52222a6e9e2536ccaff"
   integrity sha512-ryhi3fd1mKf3fSjbLXOfK2D06YwKNic1nC9mWqybBHdObPd8KJ2vjaXZfYj1U23t+V8T8n0d7gwnc9XbIdFbyQ==
@@ -5936,7 +5947,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==
 
-lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
+lodash@4.17.21, lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -6100,7 +6111,7 @@ matcher@^1.0.0:
   dependencies:
     escape-string-regexp "^1.0.4"
 
-md-file-tree@^0.2.0:
+md-file-tree@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/md-file-tree/-/md-file-tree-0.2.0.tgz#3bcebcc6276e905d8447cb9aacad5fb22ecc4d96"
   integrity sha512-dbuE5d6nG0UPbvUBMoJth/AK1154ZvGubUxd391Mc7JvKtVx8YxKD8dv1nOYFSOxGm/xxDUJBLVxnqqwDOhj1Q==
@@ -8454,7 +8465,7 @@ serve-static@1.15.0:
     parseurl "~1.3.3"
     send "0.18.0"
 
-serviceworker-webpack-plugin@^1.0.1:
+serviceworker-webpack-plugin@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/serviceworker-webpack-plugin/-/serviceworker-webpack-plugin-1.0.1.tgz#481863288487e92da01d49745336c72ef8a6136b"
   integrity sha512-VgDEkZ3pA0HajsRaWtl5w6bLxAXx0Y+4dm7YeTcIxVmvC9YXvstex38HOBDuYETeDS5fUlBy/47gC0QYBrG0nw==
@@ -9150,6 +9161,11 @@ temp-dir@^1.0.0:
   resolved "https://registry.yarnpkg.com/temp-dir/-/temp-dir-1.0.0.tgz#0a7c0ea26d3a39afa7e0ebea9c1fc0bc4daa011d"
   integrity sha512-xZFXEGbG7SNC3itwBzI3RYjq/cEhBkx2hJuKGIUOcEULmkQExXiHat2z/qkISYsuR+IKumhEfKKbV5qXmhICFQ==
 
+temp-dir@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/temp-dir/-/temp-dir-2.0.0.tgz#bde92b05bdfeb1516e804c9c00ad45177f31321e"
+  integrity sha512-aoBAniQmmwtcKp/7BzsH8Cxzv8OL736p7v1ihGb5e9DJ9kTwGWHrQrVB5+lfVDzfGrdRzXch+ig7LHaY1JTOrg==
+
 tempfile@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/tempfile/-/tempfile-2.0.0.tgz#6b0446856a9b1114d1856ffcbe509cccb0977265"
@@ -9157,6 +9173,14 @@ tempfile@^2.0.0:
   dependencies:
     temp-dir "^1.0.0"
     uuid "^3.0.1"
+
+tempfile@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/tempfile/-/tempfile-3.0.0.tgz#5376a3492de7c54150d0cc0612c3f00e2cdaf76c"
+  integrity sha512-uNFCg478XovRi85iD42egu+eSFUmmka750Jy7L5tfHI5hQKKtbPnxaSaXAbBqCDYrw3wx4tXjKwci4/QmsZJxw==
+  dependencies:
+    temp-dir "^2.0.0"
+    uuid "^3.3.2"
 
 terser-webpack-plugin@1.3.0:
   version "1.3.0"
