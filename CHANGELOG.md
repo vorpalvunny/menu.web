@@ -1,5 +1,12 @@
+## <small>2.1.3 (2022-07-13)</small>
+
+* WIP: refactor ([94b73db](https://github.com/fizzjs/vb-menu.web/commit/94b73db))
+
+
+
 ## <small>2.1.2 (2022-07-13)</small>
 
+* 2.1.2 ([fb04830](https://github.com/fizzjs/vb-menu.web/commit/fb04830))
 * initial commit ([3a05d36](https://github.com/fizzjs/vb-menu.web/commit/3a05d36))
 * initial commit ([3ab90f7](https://github.com/fizzjs/vb-menu.web/commit/3ab90f7))
 * initial commit ([4b4a789](https://github.com/fizzjs/vb-menu.web/commit/4b4a789))
