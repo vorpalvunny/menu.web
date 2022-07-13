@@ -20,8 +20,8 @@ const opt = _.assign(_.cloneDeep(options), {
   files: [
     'src/sw.js',
   ],
-  from: new RegExp(/const VERSION = '(.*)',/, 'gi'),
-  to: `const VERSION = '${version}',`,
+  from: new RegExp(/VERSION \= '(.*)'/, 'gi'),
+  to: `VERSION = '${version}'`,
 })
 const resolve = (results) =>
   results.map((result) =>
