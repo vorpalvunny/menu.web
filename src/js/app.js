@@ -11,11 +11,13 @@ export class App {
    */
   constructor() {
     this.config = {
+      storeKey: 'VB_PAGE',
       prefix: 'page',
       start: 0,
       last: 14,
     }
     this.state = {
+      isScaling: false,
       isBusy: false,
       page: 0,
       pos: {
@@ -117,10 +119,25 @@ export class App {
   /**
    *
    *
+   * @return {number}
+   * @memberof App
+   */
+  get startPage() {
+    let page = Number(localStorage.getItem(this.config.storeKey))
+    if (isNaN(page)) {
+      page = this.config.start
+    }
+
+    return page
+  }
+
+  /**
+   *
+   *
    * @memberof App
    */
   init() {
-    this.goTo(this.config.start)
+    this.goTo(this.startPage)
     this.registerEventListeners()
   }
 
@@ -153,29 +170,41 @@ export class App {
   /**
    *
    *
+   * @param {HTMLButtonElement} $button
+   * @param {boolean} [isVisible=false]
+   * @memberof App
+   */
+  toggleButton($button, isVisible = false) {
+    const display = isVisible ? 'inline-block' : 'none'
+    $button.style.display = display
+  }
+
+  /**
+   *
+   *
    * @param {number} [no=0]
    * @memberof App
    */
   goTo(no = 0) {
+    localStorage.setItem(this.config.storeKey, no)
     this.state.page = no
     this.$img.setAttribute('src', this.getSrc(no))
     this.$figcaption.innerText = `${no + 1}`
 
+    this.toggleButton(this.$next, true)
+    this.toggleButton(this.$prev, true)
+
     const { start, last } = this.config
     switch (this.state.page) {
       case start:
-        this.$next.style.display = 'inline-block'
-        this.$prev.style.display = 'none'
+        this.toggleButton(this.$prev, false)
         break
 
       case last - 1:
-        this.$next.style.display = 'none'
-        this.$prev.style.display = 'inline-block'
+        this.toggleButton(this.$next, false)
         break
 
       default:
-        this.$next.style.display = 'inline-block'
-        this.$prev.style.display = 'inline-block'
         break
     }
   }
@@ -190,7 +219,48 @@ export class App {
     this.$prev.addEventListener('click', this.prev.bind(this))
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
+    this.$main.addEventListener('ontouchend', this.onTouchEnd.bind(this), false)
+    this.$main.addEventListener('gesturechange', this.onGestureChange.bind(this), false)
     document.addEventListener('wheel', this.onWheel.bind(this))
+  }
+
+  /**
+   *
+   * @description only works for ios
+   * @param {GestureEvent} e
+   * @memberof App
+   */
+  onGestureChange(e) {
+    const { isScaling } = this.state
+    if (!isScaling) {
+      return
+    }
+
+    let scale = 1
+    switch (true) {
+      case e.scale < 1.0:
+      case e.scale > 1.0:
+        scale = e.scale
+        break
+      default:
+        break
+    }
+
+    this.$img.style.transform = div.style.transform.replace(/scale\([0-9|.]*\)/, `scale(${scale})`)
+  }
+
+  /**
+   *
+   *
+   * @param {TouchEvent} e
+   * @memberof App
+   */
+  onTouchEnd(e) {
+    this.state.isScaling = false
+    const isScaling = e.touches.length === 2
+    if (isScaling) {
+      return
+    }
   }
 
   /**
@@ -200,6 +270,12 @@ export class App {
    * @memberof App
    */
   onMoveTouch(e) {
+    const isScaling = e.touches.length === 2 && e.changedTouches.length == 2
+    if (isScaling) {
+      this.state.isScaling = true
+      return
+    }
+
     if (!this.state.pos.initial) {
       return
     }
@@ -232,8 +308,15 @@ export class App {
    * @memberof App
    */
   onStartTouch(e) {
+    const isScaling = e.touches.length === 2
+    if (isScaling) {
+      this.state.isScaling = true
+      return
+    }
+
     const [$0] = e.touches
     this.state.pos.initial = $0
+    return
   }
 
   /**
@@ -256,6 +339,7 @@ export class App {
       if (Math.abs(pos) > 0) {
         dir ? this.next() : this.prev()
       }
+
       window.setTimeout(() => (this.state.isBusy = false), 1000)
     })
   }
