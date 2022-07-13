@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/fizzjs/vb-menu.web/issues"
   },
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "build": "webpack -p --progress --mode production --config webpack.config.js",
     "predeploy": "npm run build",
@@ -22,7 +22,7 @@
     "vcs:major": "npm version major && git push origin --tags",
     "vcs:minor": "npm version minor && git push origin --tags",
     "vcs:patch": "npm version patch && git push origin --tags",
-    "version": "yarn env && npx conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && node ./version && git add src/sw.js"
+    "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && node ./version && git add src/sw.js"
   },
   "dependencies": {},
   "devDependencies": {
