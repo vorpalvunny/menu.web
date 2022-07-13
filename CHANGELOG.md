@@ -1,5 +1,6 @@
-## <small>2.1.1 (2022-07-13)</small>
+## <small>2.1.2 (2022-07-13)</small>
 
+* initial commit ([3a05d36](https://github.com/fizzjs/vb-menu.web/commit/3a05d36))
 * initial commit ([3ab90f7](https://github.com/fizzjs/vb-menu.web/commit/3ab90f7))
 * initial commit ([4b4a789](https://github.com/fizzjs/vb-menu.web/commit/4b4a789))
 * initial commit ([3c98d47](https://github.com/fizzjs/vb-menu.web/commit/3c98d47))
