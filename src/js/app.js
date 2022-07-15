@@ -427,7 +427,7 @@ export class App {
   onGestureChange(e) {
     const { isScaling } = this.state
     if (!isScaling) {
-      return
+      // return
     }
 
     const { scale = 1 } = e
@@ -441,10 +441,10 @@ export class App {
    * @memberof App
    */
   onTouchEnd(e) {
-    this.state.isScaling = false
+    // this.state.isScaling = false
     const isScaling = e.touches.length === 2
     if (isScaling) {
-      return
+      // return
     }
   }
 
@@ -457,8 +457,8 @@ export class App {
   onMoveTouch(e) {
     const isScaling = e.touches.length === 2 && e.changedTouches.length == 2
     if (isScaling) {
-      this.state.isScaling = true
-      return
+      // this.state.isScaling = true
+      // return
     }
 
     if (!this.state.pos.initial) {
@@ -495,8 +495,8 @@ export class App {
   onStartTouch(e) {
     const isScaling = e.touches.length === 2
     if (isScaling) {
-      this.state.isScaling = true
-      return
+      // this.state.isScaling = true
+      // return
     }
 
     const [$0] = e.touches
