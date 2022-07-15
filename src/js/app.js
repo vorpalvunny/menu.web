@@ -9,14 +9,16 @@ export class App {
    * Creates an instance of App.
    * @memberof App
    */
-  constructor() {
+  constructor(VERSION = '2.1.3') {
     this.config = {
+      version: VERSION,
       storeKey: 'VB_PAGE',
       prefix: 'page',
-      start: 0,
-      last: 14,
+      pages: 13,
     }
     this.state = {
+      data: {},
+      isSearch: false,
       isScaling: false,
       isBusy: false,
       page: 0,
@@ -32,6 +34,36 @@ export class App {
         },
       },
     }
+  }
+
+  /**
+   *
+   * @type {HTMLInputElement}
+   * @readonly
+   * @memberof App
+   */
+  get $input() {
+    return document.querySelector('input')
+  }
+
+  /**
+   *
+   * @type {HTMLFormElement}
+   * @readonly
+   * @memberof App
+   */
+  get $form() {
+    return document.querySelector('form')
+  }
+
+  /**
+   *
+   * @type {HTMLDivElement}
+   * @readonly
+   * @memberof App
+   */
+  get $overlay() {
+    return document.querySelector('.overlay')
   }
 
   /**
@@ -76,6 +108,16 @@ export class App {
 
   /**
    *
+   * @type {HTMLElement}
+   * @readonly
+   * @memberof App
+   */
+  get $close() {
+    return document.querySelector('.close')
+  }
+
+  /**
+   *
    * @type {HTMLButtonElement}
    * @readonly
    * @memberof App
@@ -92,6 +134,16 @@ export class App {
    */
   get $prev() {
     return document.querySelector('.prev')
+  }
+
+  /**
+   *
+   * @type {HTMLButtonElement}
+   * @readonly
+   * @memberof App
+   */
+  get $search() {
+    return document.querySelector('.search')
   }
 
   /**
@@ -125,7 +177,7 @@ export class App {
   get startPage() {
     let page = Number(localStorage.getItem(this.config.storeKey))
     if (isNaN(page)) {
-      page = this.config.start
+      page = 0
     }
 
     return page
@@ -139,6 +191,8 @@ export class App {
   init() {
     this.goTo(this.startPage)
     this.registerEventListeners()
+    this.resetForm()
+    this.fetchData().then(data => (this.state.data = data))
   }
 
   /**
@@ -147,7 +201,7 @@ export class App {
    * @memberof App
    */
   next() {
-    if (this.state.page === this.config.last - 1) {
+    if (this.state.page === this.config.pages - 1) {
       return
     }
 
@@ -160,11 +214,41 @@ export class App {
    * @memberof App
    */
   prev() {
-    if (this.state.page === this.config.start) {
+    if (this.state.page === 0) {
       return
     }
 
     this.goTo(this.state.page - 1)
+  }
+
+  /**
+   *
+   *
+   * @param {MouseEvent} e
+   * @memberof App
+   */
+  toggleOverlay(e) {
+    const { target = '' } = e
+    if (target === this.$input || target === this.$close) {
+      return e.preventDefault()
+    }
+
+    this.resetForm()
+    this.state.isSearch = !this.state.isSearch
+    this.$overlay.style.display = this.state.isSearch ? 'flex' : 'none'
+    if (this.state.isSearch) {
+      this.$input.focus()
+    }
+  }
+
+  /**
+   *
+   *
+   * @memberof App
+   */
+  resetForm() {
+    this.$form.reset()
+    this.setInputError(false)
   }
 
   /**
@@ -194,13 +278,13 @@ export class App {
     this.toggleButton(this.$next, true)
     this.toggleButton(this.$prev, true)
 
-    const { start, last } = this.config
+    const { pages } = this.config
     switch (this.state.page) {
-      case start:
+      case 0:
         this.toggleButton(this.$prev, false)
         break
 
-      case last - 1:
+      case pages - 1:
         this.toggleButton(this.$next, false)
         break
 
@@ -217,15 +301,125 @@ export class App {
   registerEventListeners() {
     this.$next.addEventListener('click', this.next.bind(this))
     this.$prev.addEventListener('click', this.prev.bind(this))
+    this.$search.addEventListener('click', this.toggleOverlay.bind(this))
+    this.$close.addEventListener('click', this.resetForm.bind(this))
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('ontouchend', this.onTouchEnd.bind(this), false)
-    this.$main.addEventListener('gesturechange', this.onGestureChange.bind(this), false)
-    document.addEventListener('wheel', this.onWheel.bind(this))
+    this.$main.addEventListener('wheel', this.onWheel.bind(this))
+    this.$form.addEventListener('submit', this.onSubmit.bind(this))
+    this.$input.addEventListener('change', this.onInput.bind(this))
+    this.$overlay.addEventListener('click', this.toggleOverlay.bind(this), false)
   }
 
   /**
    *
+   *
+   * @memberof App
+   */
+  onInput() {
+    this.$input.setCustomValidity('')
+  }
+
+  /**
+   *
+   *
+   * @param {boolean} [hasError=true]
+   * @memberof App
+   */
+  setInputError(hasError = true) {
+    const error = hasError ? 'Oops! not found...' : ''
+    const color = hasError ? 'red' : 'white'
+    const icon = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${color}'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>")`
+    this.$input.setCustomValidity(error)
+    this.$form.style.setProperty('--validate-color', color)
+    this.$form.style.setProperty('--close-icon', icon)
+  }
+
+  /**
+   *
+   *
+   * @return {Object}
+   * @memberof App
+   */
+  async fetchData() {
+    const options = {
+      method: 'GET',
+      mode: 'same-origin',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    }
+    const response = await fetch('/data.json', options)
+    return response.json()
+  }
+
+  /**
+   *
+   *
+   * @param {string} word
+   * @return {number}
+   * @memberof App
+   */
+  findByWord(word) {
+    let page
+    for (const [key = '', values = []] of Object.entries(this.state.data)) {
+      if (values.some(value => value.includes(String(word).toLowerCase()))) {
+        page = Number(key)
+        break
+      }
+    }
+
+    return page
+  }
+
+  /**
+   *
+   *
+   * @param {SubmitEvent} e
+   * @memberof App
+   */
+  onSubmit(e) {
+    e.preventDefault()
+    const { value = '' } = this.$input
+    if (value.length === 0) {
+      return
+    }
+
+    const found = this.findByWord(value)
+    const hasError = typeof found !== 'number'
+    this.setInputError(hasError)
+    if (!hasError) {
+      this.toggleOverlay(e)
+      this.goTo(found)
+    }
+  }
+
+  /**
+   *
+   * @deprecated
+   * @param {number} [scale=1]
+   * @memberof App
+   */
+  zoom(scale = 1) {
+    switch (true) {
+      case scale < 1.0:
+      case scale > 1.0:
+        break
+      default:
+        scale = 1
+        break
+    }
+
+    const { transform } = this.$img.style
+    this.$img.style.transform = transform.replace(/scale\([0-9|.]*\)/, `scale(${scale})`)
+  }
+
+  /**
+   * @deprecated
    * @description only works for ios
    * @param {GestureEvent} e
    * @memberof App
@@ -236,17 +430,8 @@ export class App {
       return
     }
 
-    let scale = 1
-    switch (true) {
-      case e.scale < 1.0:
-      case e.scale > 1.0:
-        scale = e.scale
-        break
-      default:
-        break
-    }
-
-    this.$img.style.transform = div.style.transform.replace(/scale\([0-9|.]*\)/, `scale(${scale})`)
+    const { scale = 1 } = e
+    this.zoom(scale)
   }
 
   /**

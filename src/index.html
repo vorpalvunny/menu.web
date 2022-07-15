@@ -105,13 +105,23 @@
 <body>
   <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
   <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+  <button class="search"><i class="fa-solid fa-search"></i></button>
+  <div class="overlay">
+    <form action="#" autocomplete="off">
+      <input type="search" id="input" autocomplete="off" placeholder="What do you want?" minlength="1" maxlength="10"
+        required />
+      <label for="input">
+        <i class="fa-solid fa-times-circle close"></i>
+      </label>
+    </form>
+  </div>
   <main>
-    <div>
+    <section>
       <figure>
         <img src="/public/img/page0.jpg" loading="lazy" />
         <figcaption></figcaption>
       </figure>
-    </div>
+    </section>
   </main>
 </body>
 <script>

@@ -46,6 +46,27 @@ main {
 
 div {
   display: flex;
+  &.overlay {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: black;
+    opacity: 0.75;
+    transition: all 0.5s ease-in-out;
+    &.active {
+      display: flex;
+    }
+  }
+}
+
+section {
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
@@ -76,6 +97,7 @@ figcaption {
 
 img {
   border: none;
+  transform: scale(1);
 }
 
 @media only screen and (max-width: 600px) {
@@ -182,5 +204,10 @@ button {
   &.prev {
     left: 0.25rem;
     display: none;
+  }
+  &.search {
+    top: 0.25rem;
+    right: 0.25rem;
+    display: inline-block;
   }
 }

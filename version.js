@@ -19,6 +19,7 @@ const options = {
 const opt = _.assign(_.cloneDeep(options), {
   files: [
     'src/sw.js',
+    'src/js/app.js',
   ],
   from: new RegExp(/VERSION \= '(.*)'/, 'gi'),
   to: `VERSION = '${version}'`,

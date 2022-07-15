@@ -90,6 +90,10 @@ const config = {
         to: 'manifest.webmanifest',
       },
       {
+        from: './src/data.json',
+        to: 'data.json',
+      },
+      {
         from: './src/browserconfig.xml',
         to: 'browserconfig.xml',
       },
