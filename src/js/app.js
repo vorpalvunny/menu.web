@@ -9,7 +9,7 @@ export class App {
    * Creates an instance of App.
    * @memberof App
    */
-  constructor(VERSION = '2.1.3') {
+  constructor(VERSION = '3.0.0') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
