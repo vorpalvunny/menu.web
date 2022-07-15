@@ -1,5 +1,13 @@
+## <small>3.0.1 (2022-07-15)</small>
+
+* v3.0.1 ([4485b02](https://github.com/fizzjs/vb-menu.web/commit/4485b02))
+* implement: search items, fixed menu images ([3517fc1](https://github.com/fizzjs/vb-menu.web/commit/3517fc1))
+
+
+
 ## 3.0.0 (2022-07-15)
 
+* 3.0.0 ([79a22bd](https://github.com/fizzjs/vb-menu.web/commit/79a22bd))
 * implement: search items, fixed menu images ([34e4e97](https://github.com/fizzjs/vb-menu.web/commit/34e4e97))
 * implement: search items, fixed menu images ([c2dc1b5](https://github.com/fizzjs/vb-menu.web/commit/c2dc1b5))
 
