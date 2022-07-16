@@ -1,7 +1,16 @@
+## <small>5.0.2 (2022-07-16)</small>
+
+* implement: share for mobile ([7dbfd04](https://github.com/fizzjs/vb-menu.web/commit/7dbfd04))
+* implement: share for mobile ([f3eae67](https://github.com/fizzjs/vb-menu.web/commit/f3eae67))
+* fixed: remove version query for images ([ac8a516](https://github.com/fizzjs/vb-menu.web/commit/ac8a516))
+
+
+
 ## <small>5.0.1 (2022-07-16)</small>
 
-* fixed: remove version query for images ([4b946c1](https://github.com/fizzjs/vb-menu.web/commit/4b946c1))
+* 5.0.1 ([2a306af](https://github.com/fizzjs/vb-menu.web/commit/2a306af))
 * v5.0.0 ([69071f0](https://github.com/fizzjs/vb-menu.web/commit/69071f0))
+* fixed: remove version query for images ([4b946c1](https://github.com/fizzjs/vb-menu.web/commit/4b946c1))
 
 
 
