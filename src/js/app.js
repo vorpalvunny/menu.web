@@ -217,7 +217,7 @@ export class App {
    * @memberof App
    */
   getSrc(no = 0) {
-    return `/public/img/${this.getId(no)}.jpg?version=${this.config.version}`
+    return `/public/img/${this.getId(no)}.jpg`
   }
 
   /**
