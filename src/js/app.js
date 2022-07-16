@@ -180,6 +180,16 @@ export class App {
 
   /**
    *
+   * @type {HTMLButtonElement}
+   * @readonly
+   * @memberof App
+   */
+  get $share() {
+    return document.querySelector('.share')
+  }
+
+  /**
+   *
    * @type {HTMLElement}
    * @readonly
    * @memberof App
@@ -358,6 +368,50 @@ export class App {
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
     this.$overlay.addEventListener('click', this.toggleOverlay.bind(this), false)
+
+    // share for mobile
+    if ('share' in navigator) {
+      this.$share.style.display = 'inline-block'
+      this.$share.addEventListener('click', this.share.bind(this))
+    }
+
+    // work as standalone app
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      document.addEventListener('visibilitychange', this.onVisibilityChange.bind(this))
+    }
+  }
+
+  /**
+   *
+   *
+   * @param {Event} e
+   * @memberof App
+   */
+  // eslint-disable-next-line
+  share(e) {
+    const data = {
+      title: 'Vorpal Bunny 餐酒館 菜單',
+      text: '臺北市中山區林森北路85巷49號 02-2567-0015',
+      url: location.href,
+    }
+
+    return navigator
+      .share(data)
+      .then(s => console.log(s))
+      .catch(e => console.error(e))
+  }
+
+  /**
+   *
+   *
+   * @param {Event} e
+   * @memberof App
+   */
+  // eslint-disable-next-line
+  onVisibilityChange(e) {
+    if (document.visibilityState === 'hidden') {
+      // TODO:
+    }
   }
 
   /**

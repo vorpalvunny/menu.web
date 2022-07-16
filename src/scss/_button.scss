@@ -52,8 +52,13 @@ button {
 
   &.zoom {
     top: 0.25rem;
-    left: 0.25rem;
-    display: inline-block;
+    right: 2.5rem;
+  }
+
+  &.share {
+    display: none;
+    top: 0.25rem;
+    right: 4.75rem;
   }
 }
 
