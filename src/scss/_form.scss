@@ -36,7 +36,7 @@ form {
     transition: all 0.4s;
     transition-timing-function: ease-out;
     &::placeholder {
-      font-family: 'Jibril Regular Regular';
+      font-family: 'Jibril Regular Regular', sans-serif, serif;
       font-size: 1rem;
     }
   }

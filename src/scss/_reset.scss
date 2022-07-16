@@ -225,14 +225,14 @@ input[type='week'] {
 }
 
 ::-webkit-scrollbar {
-  // width: 1em;
+  -webkit-appearance: none;
 }
 
 ::-webkit-scrollbar-track {
-  // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-appearance: none;
 }
 ::-webkit-scrollbar-thumb {
-  // background-color: rgb(238, 169, 79);
+  -webkit-appearance: none;
 }
 
 [type='search']::-webkit-search-cancel-button,

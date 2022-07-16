@@ -7,6 +7,7 @@
 export class App {
   /**
    * Creates an instance of App.
+   * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
   constructor(VERSION = '4.0.0') {
@@ -325,17 +326,14 @@ export class App {
     this.state.page = no
     this.$img.setAttribute('src', this.getSrc(no))
     this.$figcaption.innerText = `${no + 1}`
-
     this.toggleButton(this.$next, true)
     this.toggleButton(this.$prev, true)
-
-    const { pages } = this.config
     switch (this.state.page) {
       case 0:
         this.toggleButton(this.$prev, false)
         break
 
-      case pages - 1:
+      case this.config.pages - 1:
         this.toggleButton(this.$next, false)
         break
 
@@ -345,7 +343,6 @@ export class App {
   }
 
   /**
-   *
    *
    * @memberof App
    */

@@ -35,15 +35,16 @@ const URLS = [
   '/public/iphonexr_splash.png',
   '/public/iphonexsmax_splash.png',
 ]
+const Logger = (str) => console.log(`[SW]: ${str}`)
 self.addEventListener('fetch', e => {
-  console.log(`fetch request : ${e.request.url}`)
+  Logger(`Fetch request : ${e.request.url}`)
   e.respondWith(
     caches.match(e.request).then(request => {
       if (request) {
-        console.log(`responding with cache : ${e.request.url}`)
+        Logger(`Responding with cache : ${e.request.url}`)
         return request
       } else {
-        console.log(`file is not cached, fetching : ${e.request.url}`)
+        Logger(`File is not cached, fetching : ${e.request.url}`)
         return fetch(e.request)
       }
     })
@@ -53,7 +54,7 @@ self.addEventListener('fetch', e => {
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      console.log(`installing cache : ${CACHE_NAME}`)
+      Logger(`Installing cache : ${CACHE_NAME}`)
       return cache.addAll(URLS)
     })
   )
@@ -68,7 +69,7 @@ self.addEventListener('activate', e => {
       return Promise.all(
         keyList.map((key, i) => {
           if (cacheWhitelist.indexOf(key) === -1) {
-            console.log(`deleting cache : ${keyList[i]}`)
+            Logger(`Deleting cache : ${keyList[i]}`)
             return caches.delete(keyList[i])
           }
         })
