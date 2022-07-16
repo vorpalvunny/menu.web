@@ -1,8 +1,17 @@
+## 5.0.0 (2022-07-16)
+
+* refactor ([255ccb9](https://github.com/fizzjs/vb-menu.web/commit/255ccb9))
+* refactor ([cac4598](https://github.com/fizzjs/vb-menu.web/commit/cac4598))
+* implement: zoom feature ([ed2d24e](https://github.com/fizzjs/vb-menu.web/commit/ed2d24e))
+
+
+
 ## 4.0.0 (2022-07-16)
 
+* 4.0.0 ([7ad4a8c](https://github.com/fizzjs/vb-menu.web/commit/7ad4a8c))
+* v3.0.1 ([7ddeb5b](https://github.com/fizzjs/vb-menu.web/commit/7ddeb5b))
 * implement: zoom feature ([56a96c9](https://github.com/fizzjs/vb-menu.web/commit/56a96c9))
 * implement: zoom feature ([43f354d](https://github.com/fizzjs/vb-menu.web/commit/43f354d))
-* v3.0.1 ([7ddeb5b](https://github.com/fizzjs/vb-menu.web/commit/7ddeb5b))
 
 
 
