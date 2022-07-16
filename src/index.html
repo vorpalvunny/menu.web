@@ -112,7 +112,7 @@
       </figure>
     </section>
   </main>
-  <div class="overlay">
+  <fieldset class="overlay">
     <form action="#" autocomplete="off">
       <input type="search" id="input" autocomplete="off" placeholder="what are you looking for?" minlength="1"
         maxlength="10" required />
@@ -120,7 +120,7 @@
         <i class="fa-solid fa-times-circle close"></i>
       </label>
     </form>
-  </div>
+  </fieldset>
   <button class="share"><i class="fa-solid fa-share"></i></button>
   <button class="search"><i class="fa-solid fa-search"></i></button>
   <button class="zoom"><i class="fa-solid fa-search-plus"></i></button>
@@ -128,8 +128,5 @@
   <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
   <footer></footer>
 </body>
-<script>
-  navigator.serviceWorker && navigator.serviceWorker.register('/sw.js', { scope: '/' })
-</script>
 
 </html>

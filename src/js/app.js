@@ -449,8 +449,15 @@ export class App {
    */
   findByWord(word = '') {
     let page
+    word = String(word).toLowerCase()
     for (const [key = '', values = []] of Object.entries(this.state.data)) {
-      if (values.some(value => value.includes(String(word).toLowerCase()))) {
+      // exact match
+      if (values.includes(word)) {
+        page = Number(key)
+        break
+      }
+
+      if (values.some(value => value.includes(word))) {
         page = Number(key)
         break
       }
@@ -489,22 +496,40 @@ export class App {
   zoom() {
     let scale = 1
     const prefix = 'fa-search-'
-    const plus = 'plus'
-    const minus = 'minus'
+    const plus = `${prefix}plus`
+    const minus = `${prefix}minus`
     const $icon = this.$zoom.firstChild
     const clazz = Array.from($icon.classList).find(c => c.includes(prefix))
     switch (clazz) {
-      case `${prefix}${plus}`:
+      case plus:
         scale = 1.2
-        $icon.classList.replace(`${prefix}${plus}`, `${prefix}${minus}`)
+        $icon.classList.replace(plus, minus)
         break
       default:
-      case `${prefix}${minus}`:
-        $icon.classList.replace(`${prefix}${minus}`, `${prefix}${plus}`)
+      case minus:
+        $icon.classList.replace(minus, plus)
         break
     }
 
     this.$img.style.transform = `scale(${scale})`
+  }
+
+  /**
+   *
+   *
+   * @param {Touch} a
+   * @param {Touch} b
+   * @return {Touch}
+   * @memberof App
+   */
+  computePos(a, b) {
+    const clientX = a.clientX - b.clientX
+    const clientY = a.clientY - b.clientY
+
+    return {
+      clientX,
+      clientY,
+    }
   }
 
   /**
@@ -520,21 +545,18 @@ export class App {
 
     const [$0] = e.touches
     this.state.pos.current = $0
-    const diff = {
-      clientX: this.state.pos.initial.clientX - this.state.pos.current.clientX,
-      clientY: this.state.pos.initial.clientY - this.state.pos.current.clientY,
-    }
-
-    if (Math.abs(diff.clientX) > Math.abs(diff.clientY)) {
+    const { initial, current } = this.state.pos
+    const { clientX, clientY } = this.computePos(initial, current)
+    if (Math.abs(clientX) > Math.abs(clientY)) {
       return
     }
 
-    const gap = Math.abs(diff.clientY)
+    const gap = Math.abs(clientY)
     if (gap < 5) {
       return
     }
 
-    diff.clientY > 0 ? this.next() : this.prev()
+    clientY > 0 ? this.next() : this.prev()
     this.state.pos.initial = undefined
     e.preventDefault()
   }

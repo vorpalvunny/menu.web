@@ -29,6 +29,7 @@ form {
     width: 20rem;
     padding: 0 0.75rem;
     outline: none;
+    font-family: sans-serif;
     font-size: 1rem;
     font-weight: lighter;
     color: var(--validate-color);
@@ -36,7 +37,7 @@ form {
     transition: all 0.4s;
     transition-timing-function: ease-out;
     &::placeholder {
-      font-family: 'Jibril Regular Regular', sans-serif, serif;
+      font-family: 'Jibril Regular Regular';
       font-size: 1rem;
     }
   }

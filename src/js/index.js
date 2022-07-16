@@ -2,7 +2,9 @@ import '../scss/index.scss'
 import { App } from './app'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 if ('serviceWorker' in navigator) {
-  const registration = runtime.register()
-  registration && registration.then(res => console.log(res))
+  const sw = runtime.register()
+  sw && sw.then(registration => console.log(registration))
 }
-document.addEventListener('DOMContentLoaded', () => new App().init())
+
+const app = new App()
+document.addEventListener('DOMContentLoaded', () => app.init())
