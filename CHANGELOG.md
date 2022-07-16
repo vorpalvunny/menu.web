@@ -1,5 +1,13 @@
+## <small>5.0.1 (2022-07-16)</small>
+
+* fixed: remove version query for images ([4b946c1](https://github.com/fizzjs/vb-menu.web/commit/4b946c1))
+* v5.0.0 ([69071f0](https://github.com/fizzjs/vb-menu.web/commit/69071f0))
+
+
+
 ## 5.0.0 (2022-07-16)
 
+* 5.0.0 ([7e733a3](https://github.com/fizzjs/vb-menu.web/commit/7e733a3))
 * refactor ([255ccb9](https://github.com/fizzjs/vb-menu.web/commit/255ccb9))
 * refactor ([cac4598](https://github.com/fizzjs/vb-menu.web/commit/cac4598))
 * implement: zoom feature ([ed2d24e](https://github.com/fizzjs/vb-menu.web/commit/ed2d24e))

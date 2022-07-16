@@ -1,5 +1,5 @@
 const APP_PREFIX = '_VBMENU_'
-const VERSION = '5.0.0'
+const VERSION = '5.0.1'
 const CACHE_NAME = `${APP_PREFIX}${VERSION}`
 const URLS = [
   '/public/android-chrome-192x192.png',
