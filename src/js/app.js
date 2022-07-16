@@ -19,7 +19,6 @@ export class App {
     this.state = {
       data: {},
       isSearch: false,
-      isScaling: false,
       isBusy: false,
       page: 0,
       pos: {
@@ -34,6 +33,28 @@ export class App {
         },
       },
     }
+    this.fetchData().then(data => (this.state.data = data))
+  }
+
+  /**
+   *
+   *
+   * @return {Object}
+   * @memberof App
+   */
+  async fetchData() {
+    const options = {
+      method: 'GET',
+      mode: 'same-origin',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    }
+    const response = await fetch('/data.json', options)
+    return response.json()
   }
 
   /**
@@ -148,6 +169,36 @@ export class App {
 
   /**
    *
+   * @type {HTMLButtonElement}
+   * @readonly
+   * @memberof App
+   */
+  get $zoom() {
+    return document.querySelector('.zoom')
+  }
+
+  /**
+   *
+   * @type {HTMLElement}
+   * @readonly
+   * @memberof App
+   */
+  get $header() {
+    return document.querySelector('header')
+  }
+
+  /**
+   *
+   * @type {HTMLElement}
+   * @readonly
+   * @memberof App
+   */
+  get $footer() {
+    return document.querySelector('footer')
+  }
+
+  /**
+   *
    *
    * @param {number} [no=0]
    * @return {string}
@@ -165,7 +216,7 @@ export class App {
    * @memberof App
    */
   getSrc(no = 0) {
-    return `/public/img/${this.getId(no)}.jpg`
+    return `/public/img/${this.getId(no)}.jpg?version=${this.config.version}`
   }
 
   /**
@@ -189,10 +240,10 @@ export class App {
    * @memberof App
    */
   init() {
+    this.$footer.innerText = `v${this.config.version}`
     this.goTo(this.startPage)
     this.registerEventListeners()
     this.resetForm()
-    this.fetchData().then(data => (this.state.data = data))
   }
 
   /**
@@ -303,9 +354,9 @@ export class App {
     this.$prev.addEventListener('click', this.prev.bind(this))
     this.$search.addEventListener('click', this.toggleOverlay.bind(this))
     this.$close.addEventListener('click', this.resetForm.bind(this))
+    this.$zoom.addEventListener('click', this.zoom.bind(this))
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
-    this.$main.addEventListener('ontouchend', this.onTouchEnd.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
@@ -315,9 +366,11 @@ export class App {
   /**
    *
    *
+   * @param {Event} e
    * @memberof App
    */
-  onInput() {
+  // eslint-disable-next-line
+  onInput(e) {
     this.$input.setCustomValidity('')
   }
 
@@ -339,32 +392,11 @@ export class App {
   /**
    *
    *
-   * @return {Object}
-   * @memberof App
-   */
-  async fetchData() {
-    const options = {
-      method: 'GET',
-      mode: 'same-origin',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-    }
-    const response = await fetch('/data.json', options)
-    return response.json()
-  }
-
-  /**
-   *
-   *
-   * @param {string} word
+   * @param {string} [word='']
    * @return {number}
    * @memberof App
    */
-  findByWord(word) {
+  findByWord(word = '') {
     let page
     for (const [key = '', values = []] of Object.entries(this.state.data)) {
       if (values.some(value => value.includes(String(word).toLowerCase()))) {
@@ -400,52 +432,28 @@ export class App {
 
   /**
    *
-   * @deprecated
-   * @param {number} [scale=1]
+   * @param {MouseEvent} e
    * @memberof App
    */
-  zoom(scale = 1) {
-    switch (true) {
-      case scale < 1.0:
-      case scale > 1.0:
+  zoom() {
+    let scale = 1
+    const prefix = 'fa-search-'
+    const plus = 'plus'
+    const minus = 'minus'
+    const $icon = this.$zoom.firstChild
+    const clazz = Array.from($icon.classList).find(c => c.includes(prefix))
+    switch (clazz) {
+      case `${prefix}${plus}`:
+        scale = 1.2
+        $icon.classList.replace(`${prefix}${plus}`, `${prefix}${minus}`)
         break
       default:
-        scale = 1
+      case `${prefix}${minus}`:
+        $icon.classList.replace(`${prefix}${minus}`, `${prefix}${plus}`)
         break
     }
 
-    const { transform } = this.$img.style
-    this.$img.style.transform = transform.replace(/scale\([0-9|.]*\)/, `scale(${scale})`)
-  }
-
-  /**
-   * @deprecated
-   * @description only works for ios
-   * @param {GestureEvent} e
-   * @memberof App
-   */
-  onGestureChange(e) {
-    const { isScaling } = this.state
-    if (!isScaling) {
-      // return
-    }
-
-    const { scale = 1 } = e
-    this.zoom(scale)
-  }
-
-  /**
-   *
-   *
-   * @param {TouchEvent} e
-   * @memberof App
-   */
-  onTouchEnd(e) {
-    // this.state.isScaling = false
-    const isScaling = e.touches.length === 2
-    if (isScaling) {
-      // return
-    }
+    this.$img.style.transform = `scale(${scale})`
   }
 
   /**
@@ -455,12 +463,6 @@ export class App {
    * @memberof App
    */
   onMoveTouch(e) {
-    const isScaling = e.touches.length === 2 && e.changedTouches.length == 2
-    if (isScaling) {
-      // this.state.isScaling = true
-      // return
-    }
-
     if (!this.state.pos.initial) {
       return
     }
@@ -493,15 +495,8 @@ export class App {
    * @memberof App
    */
   onStartTouch(e) {
-    const isScaling = e.touches.length === 2
-    if (isScaling) {
-      // this.state.isScaling = true
-      // return
-    }
-
     const [$0] = e.touches
     this.state.pos.initial = $0
-    return
   }
 
   /**
