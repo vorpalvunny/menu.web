@@ -1,5 +1,14 @@
+## 4.0.0 (2022-07-16)
+
+* implement: zoom feature ([56a96c9](https://github.com/fizzjs/vb-menu.web/commit/56a96c9))
+* implement: zoom feature ([43f354d](https://github.com/fizzjs/vb-menu.web/commit/43f354d))
+* v3.0.1 ([7ddeb5b](https://github.com/fizzjs/vb-menu.web/commit/7ddeb5b))
+
+
+
 ## <small>3.0.1 (2022-07-15)</small>
 
+* 3.0.1 ([8100670](https://github.com/fizzjs/vb-menu.web/commit/8100670))
 * v3.0.1 ([4485b02](https://github.com/fizzjs/vb-menu.web/commit/4485b02))
 * implement: search items, fixed menu images ([3517fc1](https://github.com/fizzjs/vb-menu.web/commit/3517fc1))
 
