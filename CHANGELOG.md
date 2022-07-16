@@ -1,5 +1,13 @@
+## <small>5.0.4 (2022-07-16)</small>
+
+* refactor ([c959cd2](https://github.com/fizzjs/vb-menu.web/commit/c959cd2))
+* refactor ([65be804](https://github.com/fizzjs/vb-menu.web/commit/65be804))
+
+
+
 ## <small>5.0.3 (2022-07-16)</small>
 
+* 5.0.3 ([81cba95](https://github.com/fizzjs/vb-menu.web/commit/81cba95))
 * refactor ([7d5d4da](https://github.com/fizzjs/vb-menu.web/commit/7d5d4da))
 * implement: share for mobile ([29720ee](https://github.com/fizzjs/vb-menu.web/commit/29720ee))
 

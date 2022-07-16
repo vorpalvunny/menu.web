@@ -1,5 +1,5 @@
 const APP_PREFIX = '_VBMENU_'
-const VERSION = '5.0.3'
+const VERSION = '5.0.4'
 const CACHE_NAME = `${APP_PREFIX}${VERSION}`
 const URLS = [
   "/manifest.webmanifest",
