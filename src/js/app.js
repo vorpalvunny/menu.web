@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.28') {
+  constructor(VERSION = '5.0.29') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -535,7 +535,6 @@ export class App {
     e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
-      alert('value is empty!')
       return
     }
 
