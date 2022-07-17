@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.33') {
+  constructor(VERSION = '5.0.34') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -405,7 +405,8 @@ export class App {
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('input', this.onInput.bind(this))
-    this.$form.addEventListener('submit', this.onSubmit.bind(this))
+    // this.$form.addEventListener('submit', this.onSubmit.bind(this))
+    this.$form.addEventListener('search', this.onSubmit.bind(this))
     // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
     // share for mobile
     if ('share' in navigator) {
@@ -534,8 +535,7 @@ export class App {
    */
   // eslint-disable-next-line
   onSubmit(e) {
-    alert('onSubmit')
-    // e.preventDefault()
+    e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
