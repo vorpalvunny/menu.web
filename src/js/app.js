@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.8') {
+  constructor(VERSION = '5.0.9') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -385,14 +385,14 @@ export class App {
     this.$next.addEventListener('click', this.next.bind(this))
     this.$prev.addEventListener('click', this.prev.bind(this))
     this.$search.addEventListener('click', this.toggleOverlay.bind(this))
+    this.$overlay.addEventListener('click', this.toggleOverlay.bind(this), false)
     this.$close.addEventListener('click', this.resetForm.bind(this))
     this.$zoom.addEventListener('click', this.zoom.bind(this))
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
-    this.$form.addEventListener('submit', this.onSubmit.bind(this))
-    this.$overlay.addEventListener('click', this.toggleOverlay.bind(this), false)
+    this.$input.addEventListener('search', this.onSubmit.bind(this))
 
     // share for mobile
     if ('share' in navigator) {
@@ -494,12 +494,12 @@ export class App {
   /**
    *
    *
-   * @param {SubmitEvent} e
+   * @param {Event} e
    * @memberof App
    */
+  // eslint-disable-next-line
   onSubmit(e) {
-    alert('onSubmit')
-    e.preventDefault()
+    // e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
@@ -509,7 +509,7 @@ export class App {
     const hasError = typeof found !== 'number'
     this.setInputError(hasError)
     if (!hasError) {
-      this.toggleOverlay(e)
+      this.$overlay.click()
       this.goTo(found)
     }
   }
