@@ -392,7 +392,6 @@ export class App {
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
-    this.$input.addEventListener('search', this.onSearch.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
     this.$overlay.addEventListener('click', this.toggleOverlay.bind(this), false)
@@ -497,23 +496,15 @@ export class App {
   /**
    *
    *
-   * @memberof App
-   */
-  onSearch() {
-    if (document.activeElement) {
-      this.$input.blur()
-    }
-    this.$form.submit()
-  }
-
-  /**
-   *
-   *
    * @param {SubmitEvent} e
    * @memberof App
    */
   onSubmit(e) {
     e.preventDefault()
+    if (document.activeElement) {
+      this.$input.blur()
+    }
+
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
