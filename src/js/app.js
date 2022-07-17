@@ -402,8 +402,8 @@ export class App {
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
-    // this.$input.addEventListener('search', this.onSubmit.bind(this))
-    this.$submit.addEventListener('click', this.onSubmit.bind(this))
+    this.$form.addEventListener('submit', this.onSubmit.bind(this))
+    this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
 
     // share for mobile
     if ('share' in navigator) {
@@ -508,9 +508,8 @@ export class App {
    * @param {Event} e
    * @memberof App
    */
-  // eslint-disable-next-line
   onSubmit(e) {
-    // e.preventDefault()
+    e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
@@ -520,7 +519,7 @@ export class App {
     const hasError = typeof found !== 'number'
     this.setInputError(hasError)
     if (!hasError) {
-      this.$overlay.click()
+      this.toggleOverlay(e)
       this.goTo(found)
     }
   }
