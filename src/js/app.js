@@ -325,9 +325,7 @@ export class App {
     this.resetForm()
     this.state.isSearch = !this.state.isSearch
     this.$overlay.style.display = this.state.isSearch ? 'flex' : 'none'
-    if (this.state.isSearch) {
-      this.$input.focus()
-    }
+    this.state.isSearch ? this.$input.focus() : this.$input.blur()
   }
 
   /**
@@ -501,10 +499,6 @@ export class App {
    */
   onSubmit(e) {
     e.preventDefault()
-    if (document.activeElement) {
-      this.$input.blur()
-    }
-
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
