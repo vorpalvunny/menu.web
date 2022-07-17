@@ -508,8 +508,9 @@ export class App {
    * @param {Event} e
    * @memberof App
    */
+  // eslint-disable-next-line
   onSubmit(e) {
-    e.preventDefault()
+    // e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
