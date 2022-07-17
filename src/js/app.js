@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.18') {
+  constructor(VERSION = '5.0.19') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -329,7 +329,6 @@ export class App {
   toggleOverlay(e) {
     const { target = '' } = e
     if (target === this.$input || target === this.$close || target === this.$submit) {
-      alert('toggleOverlay preventDefault because ' + JSON.stringify(target))
       return e.preventDefault()
     }
 
@@ -513,6 +512,7 @@ export class App {
   onSubmit(e) {
     e.preventDefault()
     const { value = '' } = this.$input
+    alert(value)
     if (value.length === 0) {
       return
     }
