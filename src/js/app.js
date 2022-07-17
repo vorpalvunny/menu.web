@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.31') {
+  constructor(VERSION = '5.0.32') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -534,7 +534,8 @@ export class App {
    */
   // eslint-disable-next-line
   onSubmit(e) {
-    e.preventDefault()
+    alert('onSubmit')
+    // e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
