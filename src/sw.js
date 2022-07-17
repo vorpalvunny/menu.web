@@ -1,5 +1,5 @@
 const APP_PREFIX = '_VBMENU_'
-const VERSION = '5.0.32'
+const VERSION = '5.0.33'
 const CACHE_NAME = `${APP_PREFIX}${VERSION}`
 const URLS = serviceWorkerOption ? serviceWorkerOption.assets : []
 const Logger = (str) => console.log(`[SW]: ${str}`)
