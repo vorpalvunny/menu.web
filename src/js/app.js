@@ -34,7 +34,24 @@ export class App {
         },
       },
     }
-    this.fetchData().then(data => (this.state.data = data))
+    this.fetchData().then(data => this.setData(data))
+  }
+
+  /**
+   *
+   *
+   * @param {*} data
+   * @memberof App
+   */
+  setData(data) {
+    this.state.data = data
+    for (let values of Object.values(this.state.data)) {
+      values.map(value => {
+        const $option = document.createElement('option')
+        $option.value = value
+        this.$data.appendChild($option)
+      })
+    }
   }
 
   /**
@@ -210,6 +227,16 @@ export class App {
 
   /**
    *
+   * @type {HTMLDataListElement}
+   * @readonly
+   * @memberof App
+   */
+  get $data() {
+    return document.getElementById('data')
+  }
+
+  /**
+   *
    *
    * @param {number} [no=0]
    * @return {string}
@@ -365,8 +392,9 @@ export class App {
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
-    this.$form.addEventListener('submit', this.onSubmit.bind(this))
+    this.$input.addEventListener('search', this.onSearch.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
+    this.$form.addEventListener('submit', this.onSubmit.bind(this))
     this.$overlay.addEventListener('click', this.toggleOverlay.bind(this), false)
 
     // share for mobile
@@ -464,6 +492,18 @@ export class App {
     }
 
     return page
+  }
+
+  /**
+   *
+   *
+   * @memberof App
+   */
+  onSearch() {
+    if (document.activeElement) {
+      this.$input.blur()
+    }
+    this.$form.submit()
   }
 
   /**
