@@ -328,7 +328,7 @@ export class App {
    */
   toggleOverlay(e) {
     const { target = '' } = e
-    if (target === this.$input || target === this.$close) {
+    if (target === this.$input || target === this.$close || target === this.$submit) {
       return e.preventDefault()
     }
 
