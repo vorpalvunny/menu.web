@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.29') {
+  constructor(VERSION = '5.0.30') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -336,7 +336,9 @@ export class App {
     this.resetForm()
     this.state.isSearch = !this.state.isSearch
     this.$overlay.style.display = this.state.isSearch ? 'flex' : 'none'
-    this.state.isSearch ? this.$input.focus() : this.$input.blur()
+    if (this.state.isSearch) {
+      this.$input.focus()
+    }
   }
 
   /**
