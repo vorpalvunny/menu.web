@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.19') {
+  constructor(VERSION = '5.0.20') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -329,6 +329,7 @@ export class App {
   toggleOverlay(e) {
     const { target = '' } = e
     if (target === this.$input || target === this.$close || target === this.$submit) {
+      alert('--toggleOverlay preventDefault')
       return e.preventDefault()
     }
 
@@ -403,8 +404,8 @@ export class App {
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
-    this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
-
+    // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
+    window.addEventListener('error', this.onError.bind(this))
     // share for mobile
     if ('share' in navigator) {
       this.$share.style.display = 'inline-block'
@@ -415,6 +416,20 @@ export class App {
     if (window.matchMedia('(display-mode: standalone)').matches) {
       document.addEventListener('visibilitychange', this.onVisibilityChange.bind(this))
     }
+  }
+
+  /**
+   *
+   *
+   * @param {string} message
+   * @param {string} source
+   * @param {number} lineno
+   * @param {number} colno
+   * @param {Error} error
+   * @memberof App
+   */
+  onError(message, source, lineno, colno, error) {
+    alert(`Error raised: ${message} at ${lineno}:${colno} ${error.message}`)
   }
 
   /**
@@ -505,11 +520,12 @@ export class App {
   /**
    *
    *
-   * @param {Event} e
+   * @param {SubmitEvent} e
    * @memberof App
    */
   // eslint-disable-next-line
   onSubmit(e) {
+    alert('--onSubmit')
     e.preventDefault()
     const { value = '' } = this.$input
     alert(value)
