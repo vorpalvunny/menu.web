@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.24') {
+  constructor(VERSION = '5.0.25') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -404,6 +404,7 @@ export class App {
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
     this.$input.addEventListener('search', () => alert('fired search'))
+    this.$input.addEventListener('change', () => alert('fired change' + this.$input.value))
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
     // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
     window.addEventListener('error', this.onError.bind(this))
