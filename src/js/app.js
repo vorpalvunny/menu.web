@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.9') {
+  constructor(VERSION = '5.0.10') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -153,6 +153,16 @@ export class App {
    */
   get $close() {
     return document.querySelector('.close')
+  }
+
+  /**
+   *
+   * @type {HTMLElement}
+   * @readonly
+   * @memberof App
+   */
+  get $submit() {
+    return document.querySelector('.submit')
   }
 
   /**
@@ -392,7 +402,8 @@ export class App {
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
-    this.$input.addEventListener('search', this.onSubmit.bind(this))
+    // this.$input.addEventListener('search', this.onSubmit.bind(this))
+    this.$submit.addEventListener('click', this.onSubmit.bind(this))
 
     // share for mobile
     if ('share' in navigator) {
