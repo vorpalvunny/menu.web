@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.23') {
+  constructor(VERSION = '5.0.24') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
