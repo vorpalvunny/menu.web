@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.27') {
+  constructor(VERSION = '5.0.28') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -403,11 +403,6 @@ export class App {
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('input', this.onInput.bind(this))
-    this.$input.addEventListener('keydown', e => {
-      const key = e.keyCode || e.which
-      alert(key)
-    })
-
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
     // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
     // share for mobile
@@ -420,6 +415,7 @@ export class App {
     if (window.matchMedia('(display-mode: standalone)').matches) {
       document.addEventListener('visibilitychange', this.onVisibilityChange.bind(this))
     }
+
     window.addEventListener('error', this.onError.bind(this))
   }
 
@@ -539,6 +535,7 @@ export class App {
     e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
+      alert('value is empty!')
       return
     }
 
