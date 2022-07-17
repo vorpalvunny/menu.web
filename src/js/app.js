@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.25') {
+  constructor(VERSION = '5.0.26') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -40,7 +40,7 @@ export class App {
   /**
    *
    *
-   * @param {*} data
+   * @param {Object} data
    * @memberof App
    */
   setData(data) {
@@ -49,6 +49,7 @@ export class App {
       values.map(value => {
         const $option = document.createElement('option')
         $option.value = value
+        $option.innerText = value
         this.$data.appendChild($option)
       })
     }
@@ -329,7 +330,6 @@ export class App {
   toggleOverlay(e) {
     const { target = '' } = e
     if (target === this.$input || target === this.$close || target === this.$submit) {
-      alert('--toggleOverlay preventDefault')
       return e.preventDefault()
     }
 
@@ -402,12 +402,9 @@ export class App {
     this.$main.addEventListener('touchstart', this.onStartTouch.bind(this), false)
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
-    this.$input.addEventListener('change', this.onInput.bind(this))
-    this.$input.addEventListener('search', () => alert('fired search'))
-    this.$input.addEventListener('change', () => alert('fired change' + this.$input.value))
+    this.$input.addEventListener('input', this.onInput.bind(this))
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
     // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
-    window.addEventListener('error', this.onError.bind(this))
     // share for mobile
     if ('share' in navigator) {
       this.$share.style.display = 'inline-block'
@@ -418,6 +415,7 @@ export class App {
     if (window.matchMedia('(display-mode: standalone)').matches) {
       document.addEventListener('visibilitychange', this.onVisibilityChange.bind(this))
     }
+    window.addEventListener('error', this.onError.bind(this))
   }
 
   /**
@@ -431,7 +429,7 @@ export class App {
    * @memberof App
    */
   onError(message, source, lineno, colno, error) {
-    alert(`Error raised: ${message} at ${lineno}:${colno} ${error.message}`)
+    console.error(`Error raised: ${message} at ${source}@${lineno}:${colno}`, error)
   }
 
   /**
@@ -475,7 +473,13 @@ export class App {
    */
   // eslint-disable-next-line
   onInput(e) {
+    const { value = '' } = this.$input
     this.$input.setCustomValidity('')
+    const $options = Array.from(this.$data.childNodes)
+    const $0 = $options.find($option => $option.nodeValue === value || $option.value === value)
+    if ($0) {
+      this.onSubmit(new Event('autocomplete'))
+    }
   }
 
   /**
@@ -527,10 +531,8 @@ export class App {
    */
   // eslint-disable-next-line
   onSubmit(e) {
-    alert('--onSubmit')
     e.preventDefault()
     const { value = '' } = this.$input
-    alert(value)
     if (value.length === 0) {
       return
     }
