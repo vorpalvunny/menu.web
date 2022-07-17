@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.20') {
+  constructor(VERSION = '5.0.21') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -403,6 +403,7 @@ export class App {
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('change', this.onInput.bind(this))
+    this.$input.addEventListener('search', () => alert('fired search'))
     this.$form.addEventListener('submit', this.onSubmit.bind(this))
     // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
     window.addEventListener('error', this.onError.bind(this))
@@ -448,7 +449,7 @@ export class App {
 
     return navigator
       .share(data)
-      .then(s => console.log(s))
+      .then(res => console.log(res))
       .catch(e => console.error(e))
   }
 
