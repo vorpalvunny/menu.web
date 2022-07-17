@@ -329,6 +329,7 @@ export class App {
   toggleOverlay(e) {
     const { target = '' } = e
     if (target === this.$input || target === this.$close || target === this.$submit) {
+      alert('toggleOverlay preventDefault because ' + target.innerHTML)
       return e.preventDefault()
     }
 
@@ -510,7 +511,7 @@ export class App {
    */
   // eslint-disable-next-line
   onSubmit(e) {
-    // e.preventDefault()
+    e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
       return
