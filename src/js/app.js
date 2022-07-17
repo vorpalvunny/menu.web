@@ -498,6 +498,7 @@ export class App {
    * @memberof App
    */
   onSubmit(e) {
+    alert('onSubmit')
     e.preventDefault()
     const { value = '' } = this.$input
     if (value.length === 0) {
