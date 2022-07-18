@@ -22,7 +22,7 @@ form {
       z-index: 2;
       float: right;
       &:last-child {
-        float: left;
+        margin-right: 0.125rem;
       }
     }
   }
