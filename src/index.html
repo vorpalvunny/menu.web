@@ -113,14 +113,15 @@
     </section>
   </main>
   <fieldset class="overlay">
-    <form action="#" autocomplete="off">
+    <form action="#">
       <label for="input">
         <i class="fa-solid fa-times-circle close"></i>
         <i class="fa-solid fa-search submit"></i>
       </label>
-      <input type="search" id="input" autocomplete="off" placeholder="something sexy?" minlength="1" maxlength="32"
-        required />
-      <datalist id="data"></datalist>
+      <input type="search" id="input" placeholder="something sexy?" minlength="1" maxlength="32" required />
+      <datalist id="data">
+        <select id="select"></select>
+      </datalist>
     </form>
   </fieldset>
   <button class="share"><i class="fa-solid fa-share"></i></button>

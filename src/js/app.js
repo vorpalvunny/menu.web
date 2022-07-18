@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.41') {
+  constructor(VERSION = '5.0.42') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -45,15 +45,15 @@ export class App {
    */
   setData(data) {
     this.state.data = data
-    // TODO: autocompleteを有効にすると、バリデーションが複雑になるため
-    // for (let values of Object.values(this.state.data)) {
-    //   values.map(value => {
-    //     const $option = document.createElement('option')
-    //     $option.value = value
-    //     $option.innerText = value
-    //     this.$data.appendChild($option)
-    //   })
-    // }
+    // TODO: autocomplete を有効にすると、バリデーションが複雑になるため
+    for (let values of Object.values(this.state.data)) {
+      values.map(value => {
+        const $option = document.createElement('option')
+        $option.value = value
+        $option.innerText = value
+        this.$select.appendChild($option)
+      })
+    }
   }
 
   /**
@@ -245,6 +245,16 @@ export class App {
    */
   get $data() {
     return document.getElementById('data')
+  }
+
+  /**
+   *
+   * @type {HTMLSelectElement}
+   * @readonly
+   * @memberof App
+   */
+  get $select() {
+    return document.getElementById('select')
   }
 
   /**
@@ -486,17 +496,18 @@ export class App {
   // eslint-disable-next-line
   onInput(e) {
     this.$input.setCustomValidity('')
-    // TODO: autocompleteを有効にすると、バリデーションが複雑になるため
-    // const { value = '' } = this.$input
-    // if (value) {
-    //   this.$form.checkValidity()
-    // }
+    // TODO: autocomplete を有効にすると、バリデーションが複雑になるため
+    const { value = '' } = this.$input
+    if (value) {
+      this.$form.checkValidity()
+      this.$input.checkValidity()
+    }
 
-    // const $options = Array.from(this.$data.childNodes)
-    // const $0 = $options.find($option => $option.nodeValue === value || $option.value === value)
-    // if ($0) {
-    //   this.onSubmit(new Event('autocomplete'))
-    // }
+    const $options = Array.from(this.$data.childNodes)
+    const $0 = $options.find($option => $option.nodeValue === value || $option.value === value)
+    if ($0) {
+      this.onSubmit(new Event('autocomplete'))
+    }
   }
 
   /**
