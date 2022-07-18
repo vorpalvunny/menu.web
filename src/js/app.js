@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.34') {
+  constructor(VERSION = '5.0.35') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -327,12 +327,8 @@ export class App {
    * @param {MouseEvent} e
    * @memberof App
    */
+  // eslint-disable-next-line
   toggleOverlay(e) {
-    const { target = '' } = e
-    if (target === this.$input || target === this.$close || target === this.$submit) {
-      return e.preventDefault()
-    }
-
     this.resetForm()
     this.state.isSearch = !this.state.isSearch
     this.$overlay.style.display = this.state.isSearch ? 'flex' : 'none'
@@ -407,6 +403,8 @@ export class App {
     this.$input.addEventListener('input', this.onInput.bind(this))
     // this.$form.addEventListener('submit', this.onSubmit.bind(this))
     this.$form.addEventListener('search', this.onSubmit.bind(this))
+    this.$form.addEventListener('click', this.onFormClick.bind(this))
+
     // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
     // share for mobile
     if ('share' in navigator) {
@@ -420,6 +418,16 @@ export class App {
     }
 
     window.addEventListener('error', this.onError.bind(this))
+  }
+
+  /**
+   *
+   *
+   * @param {Event} e
+   * @memberof App
+   */
+  onFormClick(e) {
+    e.stopPropagation()
   }
 
   /**
