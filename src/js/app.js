@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.40') {
+  constructor(VERSION = '5.0.41') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -45,14 +45,15 @@ export class App {
    */
   setData(data) {
     this.state.data = data
-    for (let values of Object.values(this.state.data)) {
-      values.map(value => {
-        const $option = document.createElement('option')
-        $option.value = value
-        $option.innerText = value
-        this.$data.appendChild($option)
-      })
-    }
+    // TODO: autocompleteを有効にすると、バリデーションが複雑になるため
+    // for (let values of Object.values(this.state.data)) {
+    //   values.map(value => {
+    //     const $option = document.createElement('option')
+    //     $option.value = value
+    //     $option.innerText = value
+    //     this.$data.appendChild($option)
+    //   })
+    // }
   }
 
   /**
@@ -401,10 +402,10 @@ export class App {
     this.$main.addEventListener('touchmove', this.onMoveTouch.bind(this), false)
     this.$main.addEventListener('wheel', this.onWheel.bind(this))
     this.$input.addEventListener('input', this.onInput.bind(this))
-    // this.$form.addEventListener('submit', this.onSubmit.bind(this))
-    this.$form.addEventListener('search', this.onSubmit.bind(this))
-    this.$form.addEventListener('click', this.onFormClick.bind(this))
     this.$submit.addEventListener('click', this.onSubmit.bind(this))
+    this.$form.addEventListener('submit', this.onSubmit.bind(this))
+    this.$form.addEventListener('click', this.onFormClick.bind(this))
+
     // share for mobile
     if ('share' in navigator) {
       this.$share.style.display = 'inline-block'
@@ -485,16 +486,17 @@ export class App {
   // eslint-disable-next-line
   onInput(e) {
     this.$input.setCustomValidity('')
-    const { value = '' } = this.$input
-    if (value) {
-      this.$form.checkValidity()
-    }
+    // TODO: autocompleteを有効にすると、バリデーションが複雑になるため
+    // const { value = '' } = this.$input
+    // if (value) {
+    //   this.$form.checkValidity()
+    // }
 
-    const $options = Array.from(this.$data.childNodes)
-    const $0 = $options.find($option => $option.nodeValue === value || $option.value === value)
-    if ($0) {
-      this.onSubmit(new Event('autocomplete'))
-    }
+    // const $options = Array.from(this.$data.childNodes)
+    // const $0 = $options.find($option => $option.nodeValue === value || $option.value === value)
+    // if ($0) {
+    //   this.onSubmit(new Event('autocomplete'))
+    // }
   }
 
   /**

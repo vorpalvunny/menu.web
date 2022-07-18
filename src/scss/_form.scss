@@ -12,12 +12,12 @@ form {
   label {
     z-index: 1;
     position: absolute;
-    top: 4rem;
-    right: 4rem;
+    top: 0.4rem;
+    right: 0.4rem;
     width: 20rem;
     padding: 0.05rem 0.15rem 0 1rem;
     i {
-      font-size: 1.5rem;
+      font-size: 1rem;
       color: var(--validate-color);
       vertical-align: middle;
       text-align: center;
@@ -25,15 +25,8 @@ form {
       z-index: 2;
       float: right;
       &:last-child {
-        margin-right: 0.5rem;
+        float: left;
       }
-    }
-  }
-  button {
-    position: relative;
-    border-color: var(--validate-color);
-    i {
-      color: var(--validate-color);
     }
   }
 
@@ -45,8 +38,9 @@ form {
     border-color: var(--validate-color);
     color: var(--validate-color);
     height: 2rem;
-    width: 15rem;
-    padding: 0 0.75rem;
+    width: 20rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     outline: none;
     font-family: sans-serif;
     font-size: 1rem;
