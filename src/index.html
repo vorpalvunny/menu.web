@@ -114,13 +114,12 @@
   </main>
   <fieldset class="overlay">
     <form action="#">
-      <input type="search" id="input" autocomplete="on" list="data" placeholder="what are you looking for?"
-        minlength="1" maxlength="32" required />
+      <label for="input"></label>
+      <button class="submit"><i class="fa-solid fa-search"></i></button>
+      <input type="search" id="input" autocomplete="on" list="data" placeholder="something sexy?" minlength="1"
+        maxlength="32" required />
+      <button class="close"><i class="fa-solid fa-times-circle"></i></button>
       <datalist id="data"></datalist>
-      <label for="input">
-        <i class="fa-solid fa-times-circle close"></i>
-        <i class="fa-solid fa-search submit"></i>
-      </label>
     </form>
   </fieldset>
   <button class="share"><i class="fa-solid fa-share"></i></button>

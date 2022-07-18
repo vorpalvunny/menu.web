@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.37') {
+  constructor(VERSION = '5.0.38') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -404,7 +404,7 @@ export class App {
     // this.$form.addEventListener('submit', this.onSubmit.bind(this))
     this.$form.addEventListener('search', this.onSubmit.bind(this))
     this.$form.addEventListener('click', this.onFormClick.bind(this))
-    this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
+    this.$submit.addEventListener('click', this.onSubmit.bind(this))
     // share for mobile
     if ('share' in navigator) {
       this.$share.style.display = 'inline-block'
@@ -484,8 +484,12 @@ export class App {
    */
   // eslint-disable-next-line
   onInput(e) {
-    const { value = '' } = this.$input
     this.$input.setCustomValidity('')
+    const { value = '' } = this.$input
+    if (value) {
+      this.$form.checkValidity()
+    }
+
     const $options = Array.from(this.$data.childNodes)
     const $0 = $options.find($option => $option.nodeValue === value || $option.value === value)
     if ($0) {
