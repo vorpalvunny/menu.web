@@ -1,5 +1,12 @@
+## <small>5.0.45 (2022-07-18)</small>
+
+* refactor ([5dbeeac](https://github.com/fizzjs/vb-menu.web/commit/5dbeeac))
+
+
+
 ## <small>5.0.44 (2022-07-18)</small>
 
+* 5.0.44 ([d0a2795](https://github.com/fizzjs/vb-menu.web/commit/d0a2795))
 * refactor ([afffac6](https://github.com/fizzjs/vb-menu.web/commit/afffac6))
 
 

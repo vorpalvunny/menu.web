@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/fizzjs/vb-menu.web/issues"
   },
-  "version": "5.0.44",
+  "version": "5.0.45",
   "scripts": {
     "build": "webpack -p --progress --mode production --config webpack.config.js",
     "predeploy": "npm run build",
