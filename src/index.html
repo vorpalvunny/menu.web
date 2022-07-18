@@ -113,8 +113,9 @@
     </section>
   </main>
   <fieldset class="overlay">
-    <form action="#" novalidate>
-      <input type="search" id="input" autocomplete="on" list="data" placeholder="what are you looking for?" />
+    <form action="#">
+      <input type="search" id="input" autocomplete="on" list="data" placeholder="what are you looking for?"
+        minlength="1" maxlength="32" required />
       <datalist id="data"></datalist>
       <label for="input">
         <i class="fa-solid fa-times-circle close"></i>

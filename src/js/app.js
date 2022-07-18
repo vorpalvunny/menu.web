@@ -10,7 +10,7 @@ export class App {
    * @param {string} [VERSION='4.0.0']
    * @memberof App
    */
-  constructor(VERSION = '5.0.35') {
+  constructor(VERSION = '5.0.36') {
     this.config = {
       version: VERSION,
       storeKey: 'VB_PAGE',
@@ -404,8 +404,7 @@ export class App {
     // this.$form.addEventListener('submit', this.onSubmit.bind(this))
     this.$form.addEventListener('search', this.onSubmit.bind(this))
     this.$form.addEventListener('click', this.onFormClick.bind(this))
-
-    // this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
+    this.$submit.addEventListener('click', this.$form.submit.bind(this.$form))
     // share for mobile
     if ('share' in navigator) {
       this.$share.style.display = 'inline-block'
